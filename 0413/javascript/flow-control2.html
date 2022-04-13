@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>배열 - array</h1>
+        <ul>
+            <li>html</li>
+            <li>css</li>
+            <li>js</li>
+        </ul>
+        <ul>
+            <li>egoing</li>
+            <li>leezche</li>
+            <li>graphittie</li>
+        </ul>
+        <ul>
+            <li>10</li>
+            <li>20</li>
+            <li>30</li>
+        </ul>
+        <script>
+            let contents = ['html', 'css', 'js']
+            let members = ['egoing', 'leezche', 'graphittie']
+            let scores = [10, 20, 30]
+
+            console.log(contents[2]); 
+            console.log(contents.length); // 3
+            console.log(contents);
+            console.log(contents.push('react'));
+            console.log(contents);
+        </script>
+
+        <h1>Loop</h1>
+        <script>
+            // debugger; // 웹브라우저 실행을 중지시킴 step over로 한줄씩 실행시킴
+            console.log(1);
+            for(let i=0; i<3; i=i+1){
+                console.log(2);
+                console.log(3);
+            }
+            console.log(4);
+        </script>
+        <h2>Array + Loop</h2>
+        <div id="arrToLoop">
+
+        </div>
+        <ul>
+        <!-- let contents = ['html', 'css', 'js']
+        let members = ['egoing', 'leezche', 'graphittie']
+        let scores = [10, 20, 30] -->
+        <script>
+        //     let text='';
+        //     for(let i=0; i<members.length; i++) {
+        //         text += ('<li>' + members[i] + '</li>');
+        //     }
+        //    document.querySelector('#arrToLoop').innerHTML=`<ul>` + text + `</ul>`;
+
+            let membe = ['egoing', 'leezche', 'graphittie', 'duru'];
+            for(let i=0; i<membe.length; i++) {
+                document.write('<li>' + membe[i]+'</li>'); // 그대로 써주는거임 웹페이지에 document.write는
+            }
+           
+            
+        </script>
+        </ul>
+    </body>
+</html>
