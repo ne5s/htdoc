@@ -32,26 +32,32 @@
         <script>
             console.log(this);
         </script>
-        <input type="button" onclick="console.log(this);" value="1">
-        <input type="button" onclick="console.log(this);" value="2">
+        <script>
+            function night() {
+                document.querySelector('body').style.backgroundColor = 'black';
+                document.querySelector('body').style.color = 'white';
+                for(let i=0; i<document.querySelectorAll('a').length; i++) {
+                    document.querySelectorAll('a')[i].style.color='white';
+                }
+            }
+            function day() {
+                document.querySelector('body').style.backgroundColor = 'white';
+                document.querySelector('body').style.color = 'black';
+                for(let i=0; i<document.querySelectorAll('a').length; i++) {
+                document.querySelectorAll('a')[i].style.color='black';
+                }
+            }
+        </script>
         <input type="button" value="night" 
             onclick="
                 // 만약에 이 버튼의 value 값이 night라면 아래 코드가 실행되고, 
                 if(this.value === 'night'){
-                    document.querySelector('body').style.backgroundColor = 'black';
-                    document.querySelector('body').style.color = 'white';
-                    for(let i=0; i<document.querySelectorAll('a').length; i++) {
-                        document.querySelectorAll('a')[i].style.color='white';
-                    }
+                    night();
                     // 이 버튼의 value값을 day로 변경한다. 
                     this.value = 'day';
                 } else {
                     // 아니라면 아래 코드가 실행된다. 
-                    document.querySelector('body').style.backgroundColor = 'white';
-                    document.querySelector('body').style.color = 'black';
-                    for(let i=0; i<document.querySelectorAll('a').length; i++) {
-                    document.querySelectorAll('a')[i].style.color='black';
-                    }
+                    day();
                     // 이 버튼의 value값을 night로 변경한다. 
                     this.value = 'night';
                 }
