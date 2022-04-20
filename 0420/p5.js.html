@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.min.js"></script>
+    </head>
+    <body>
+        <h1>WEB</h1>
+        <style>
+            h1 {
+                font-size: 100px;
+            }
+            main {
+                position: absolute;
+                top:0;
+                left:0;
+                z-index: -1;
+                /* z-index : -1 주면 글씨가 원보다 항상위에 오도록*/  
+            } 
+        </style>
+        <script>
+            function setup() {
+                console.log('setup')
+                createCanvas(windowWidth, windowHeight);
+                // background(0); //배경 색
+                // circle(100, 100, 100);
+                // circle(200, 200, 50);
+            }
+
+            function draw() {
+                console.log('draw')
+                noStroke();
+                fill(100, 10) // 색깔
+                circle(mouseX, mouseY, Math.random()*50); // 원 크기 x y 좌표 등
+
+            }
+        </script>
+    </body>
+</html>
