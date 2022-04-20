@@ -2,7 +2,10 @@
 <html>
     <body>
         <header>
-            <h1><a href="/">WEB</a></h1>
+            <h1><a href="/" onclick="
+                    event.preventDefault();
+                    Welcome();
+                ">WEB</a></h1>
         </header>
         <nav>
             <ol>
@@ -25,5 +28,63 @@
             <li><a href="/delete">Delete</a></li>
             -->
         </ol>
+        <script>
+            const topics = [
+                {id:1, title:'html', body:'html is ...'},
+                {id:2, title:'css', body:'css is ...'}
+            ];
+            let selectedId = null;
+            function navHandler(e){
+                // 1. 링크가 작동하지 않아야 한다.
+                e.preventDefault();
+                // 2. 아이디 값을 알아낸다.
+                selectedId = Number(e.target.id);
+                read();
+            }
+            function nav() {
+                // const tag = topics.map(function(e){
+                //     return `<li>${e.title}</li>`;
+                // }).join('');
+                // const tag = topics.map((e)=>{
+                //     return `<li>${e.title}</li>`;
+                // }).join('');
+                // const tag = topics.map(e=>{
+                //     return `<li>${e.title}</li>`;
+                // }).join('');
+                // 다 같은 결과. 문법만 다름
+                const tag = topics.map(e=>`
+                    <li>
+                        <a href="/read/${e.id}" id="${e.id}" onclick="navHandler(event);">
+                            ${e.title}
+                        </a>
+                    </li>`).join('');
+                document.querySelector('nav>ol').innerHTML=tag;
+            }
+            function Welcome() {
+                document.querySelector('article').innerHTML = `<h2>Welcome</h2>Hello, WEB`;
+            }
+            function read(){
+                // 3. 아이디와 일치하는 topics의 원소를 찾는다.
+                const topic = topics.filter(e=>e.id === selectedId)[0];
+                //filter의 반환은 배열임 -> [0] 적어줌
+                // 4. 본문을 만든다.
+                const content = `<h2>${topic.title}</h2>${topic.body}`;
+                // 5. 본문을 출력한다.
+                document.querySelector('article').innerHTML=content;
+
+                // filter 알려주기
+                // topics.filter(e=>e.id>1);
+                    // if(e.id == 1){
+                    //     return true;
+                    // } else {
+                    //     return false;
+                    // }
+            }
+            function create(){}
+            function update(){}
+            function del(){}
+            function control(){}
+            nav();
+        </script>
     </body>
 </html>
