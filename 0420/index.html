@@ -3,8 +3,8 @@
     <body>
         <header>
             <h1><a href="/" onclick="
-                    event.preventDefault();
-                    Welcome();
+                    
+                    Welcome(event);
                 ">WEB</a></h1>
         </header>
         <nav>
@@ -31,8 +31,10 @@
         <script>
             const topics = [
                 {id:1, title:'html', body:'html is ...'},
-                {id:2, title:'css', body:'css is ...'}
+                {id:2, title:'css', body:'css is ...'},
+                {id:3, title:'js', body:'js is ...'}
             ];
+            let nextId = 4;
             let selectedId = null;
             function navHandler(e){
                 // 1. 링크가 작동하지 않아야 한다.
@@ -60,31 +62,59 @@
                     </li>`).join('');
                 document.querySelector('nav>ol').innerHTML=tag;
             }
-            function Welcome() {
+            function Welcome(e) {
                 document.querySelector('article').innerHTML = `<h2>Welcome</h2>Hello, WEB`;
+                selectedId=null;
+                control();
             }
             function read(){
-                // 3. 아이디와 일치하는 topics의 원소를 찾는다.
-                const topic = topics.filter(e=>e.id === selectedId)[0];
-                //filter의 반환은 배열임 -> [0] 적어줌
-                // 4. 본문을 만든다.
+                const topic = topics.filter(e => e.id === selectedId)[0]; 
                 const content = `<h2>${topic.title}</h2>${topic.body}`;
-                // 5. 본문을 출력한다.
-                document.querySelector('article').innerHTML=content;
-
-                // filter 알려주기
-                // topics.filter(e=>e.id>1);
-                    // if(e.id == 1){
-                    //     return true;
-                    // } else {
-                    //     return false;
-                    // }
+                document.querySelector('article').innerHTML = content;
+                control();
             }
-            function create(){}
+            function createHandler(e) {
+                e.preventDefault();
+                const t = e.target.title.value;
+                const b = e.target.body.value;
+                const newTopic = {id:nextId, title:t, body:b};
+                topics.push(newTopic);
+                nav();
+                selectedId = nextId;
+                nextId = nextId + 1;
+                read();
+                // {id:2, title:'css', body:'css is ...'}
+
+            }
+            //form 의 defaultbehavior는 다른페이지로 이동하는 것
+            function create(){
+                const content = `
+                    <form onsubmit="createHandler(event);">
+                        <p><input type="text" name="title" placeholder="제목"></p>
+                        <p><textarea name="body" placeholder="본문"></textarea></p>
+                        <p><input type="submit" value="create"></p>
+                    </form>
+                `;
+                document.querySelector('article').innerHTML = content; 
+            }
             function update(){}
             function del(){}
-            function control(){}
+            function control(){
+                let contextUI = '';
+                if(selectedId !== null) {
+                    contextUI = `
+                        <li><a href="/update">Update</a></li>
+                        <li><a href="/delete">Delete</a></li>
+                    `;
+                }
+                document.querySelector('#control').innerHTML=`
+                    <li><a href="/create" onclick="event.preventDefault(); create();">Create</a></li>
+                    ${contextUI}
+                `;
+            }
             nav();
+            Welcome();
+            control();
         </script>
     </body>
 </html>
